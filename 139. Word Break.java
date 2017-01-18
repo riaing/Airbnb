@@ -7,7 +7,7 @@ dict = ["leet", "code"].
 Return true because "leetcode" can be segmented as "leet code".
 
 
-
+######BFS 
 public class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
     Queue<Integer> queue = new LinkedList<Integer>();
@@ -34,3 +34,43 @@ public class Solution {
     }
 }
 
+
+##########DFS 
+public class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if ( s== null || wordDict == null ){
+            return false; 
+        }
+        Set<Integer> visited = new HashSet<Integer>(); 
+        return help (s, wordDict, 0, visited ); 
+    } 
+        private boolean help(String s, List<String> wordDict, int curIdx,Set<Integer> visited){
+            if ( curIdx == s.length()) {
+                return true; 
+            }
+            
+            if ( visited.contains(curIdx)){
+                return false; 
+            }
+            
+            //
+            boolean stop = false; 
+            for ( int i = curIdx+1; i <= s.length(); i ++ ){
+                if (stop)  break;
+                for ( int j = 0 ; j < wordDict.size(); j ++ ){
+                    if (wordDict.get(j).equals (s.substring(curIdx, i))) {
+                         stop  = help (s, wordDict, i,visited ); 
+                        if (stop)  break;
+                           
+                        
+                    }
+                }
+                
+            }
+            //visited save that start from this index can't find one in dic. 
+            //eg: {le,et, cod, leet} then visited will store last e, c 
+            if (!stop) visited.add(curIdx); 
+            
+            return stop; 
+        }
+}
