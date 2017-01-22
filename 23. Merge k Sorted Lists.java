@@ -16,7 +16,7 @@
  */
 public class Solution {
        /*方法二： 把comparator 分出来写    
-        private Comparator<ListNode> ListComparator = new Comparator<ListNode>(){
+        private Comparator<ListNode> listComparator = new Comparator<ListNode>(){
         public int compare(ListNode n1 , ListNode n2 ){
              if (n1.val >= n2.val ){
                     return 1;
@@ -44,7 +44,7 @@ public class Solution {
             }
             }); 
         /*方法二：直接call之前定义的comparator即可
-        PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(lists.length, ListComparator); 
+        PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(lists.length, listComparator); 
         */
         
         ListNode pseudo = new ListNode(0);
