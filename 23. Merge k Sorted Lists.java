@@ -75,6 +75,7 @@ public class Solution {
 类似merge sort，每次将所有的list两两之间合并，直到所有list合并成一个。如果用迭代而非递归，则空间复杂度为O(1)。时间复杂度：
 2n * k/2 + 4n * k/4 + ... + (2^x)n * k/(2^x) = nk * x
 k/(2^x) = 1 -> 2^x = k -> x = log2(k)
+  两个两个的合，共k/2个paris，每合一次2n，所以总共是2n*k/2 =nk. 再合一遍， k/4, *4n = nk. 所以总共logk次。 所以总共nk log（k）
 所以时间复杂度为O(nk log(k))，与方法一相同。
 
 public class Solution {
