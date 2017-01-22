@@ -1,4 +1,9 @@
 # 用到了自定义的comparator。heap和sort都曾经用到过， 另一题是Merge Ksorted Lineked List
+heap的写法： 注意这里第一个par是capacity，
+PriorityQueue(int initialCapacity, Comparator<? super E> comparator)
+Creates a PriorityQueue with the specified initial capacity that orders its elements according to the specified comparator.
+
+sort的写法：第一个par是list本身
 Arrays/Collections.sort(list, new Comparator<Type>() {
   public int compare(Type a, Type b) {
     // return the compared result;
