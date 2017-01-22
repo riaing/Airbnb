@@ -70,3 +70,45 @@ public class Solution {
         return pseudo.next; 
     }
 }
+####################################################
+思路2：Merge two lists
+利用合并两个list的方法，依次将每个list合并到结果的list中。这个方法的空间复杂度为O(1)，时间复杂度为：
+2n + 3n + ... + kn = [(k+1)*k/2-1]*n = O(nk^2))
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+       if (lists == null || lists.length == 0 ){
+           return null;
+       }
+       ListNode res = lists[0]; 
+       for ( int i = 1; i < lists.length; i ++ ){
+          res =  mergeTwoLists(res, lists[i]);
+       }
+       return res; 
+    }
+    //就是merge two sorted list的code
+    private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode pseudo = new ListNode(0);
+        ListNode tmp = pseudo; 
+        while(l1!=null && l2!=null){
+            if(l1.val<= l2.val){
+                tmp.next = l1;
+                l1= l1.next; 
+            }
+            else{
+                tmp.next = l2;
+                l2=l2.next;
+            }
+            tmp=tmp.next;
+        }
+        
+        if(l1!=null){ //if someparts left,这里用if就行！因为l1是以一个head为头的一串list！ 
+            tmp.next= l1;
+        }
+        else{
+            tmp.next = l2; 
+        }
+        return pseudo.next; 
+    }
+
+    
+}
