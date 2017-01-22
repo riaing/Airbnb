@@ -72,7 +72,11 @@ public class Solution {
 }
 ####################################################
 思路2：Merge and Conquer 
-利用合并两个list的方法，依次将每个list合并到结果的list中。
+类似merge sort，每次将所有的list两两之间合并，直到所有list合并成一个。如果用迭代而非递归，则空间复杂度为O(1)。时间复杂度：
+2n * k/2 + 4n * k/4 + ... + (2^x)n * k/(2^x) = nk * x
+k/(2^x) = 1 -> 2^x = k -> x = log2(k)
+所以时间复杂度为O(nk log(k))，与方法一相同。
+
 public class Solution {
       private ListNode mergeHelper(ListNode[] lists, int start, int end) {
         if (start == end) {
@@ -114,7 +118,59 @@ public class Solution {
             tmp.next = l2; 
         }
         return pseudo.next; 
-    }
+    }  
+}
 
+#######merge and sort. 这里先把开头和结尾两两合并成一个list，往中间走；再round一次再两两合并，和上思路一样
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode pseudo = new ListNode(0);
+        ListNode tmp = pseudo; 
+        while(l1!=null && l2!=null){
+            if(l1.val<= l2.val){
+                tmp.next = l1;
+                l1= l1.next; 
+            }
+            else{
+                tmp.next = l2;
+                l2=l2.next;
+            }
+            tmp=tmp.next;
+        }
+        
+        if(l1!=null){ //if someparts left,这里用if就行！因为l1是以一个head为头的一串list！ 
+            tmp.next= l1;
+        }
+        else{
+            tmp.next = l2; 
+        }
+        return pseudo.next; 
+    }
+     
+    
+    public ListNode mergeKLists(ListNode[] lists) {
+       if (lists == null || lists.length == 0 ){
+           return null;
+       }
+       int end = lists.length -1; 
+       while (end > 0 ){
+           int start = 0; 
+           while ( start < end ){
+               lists[start] = mergeTwoLists(lists[start], lists[end]);
+               end --;
+               start ++; 
+           }
+       }
+       return lists[0];
+     
+    }
     
 }
