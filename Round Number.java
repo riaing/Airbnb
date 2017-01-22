@@ -1,3 +1,11 @@
+# 用到了自定义的comparator。heap和sort都曾经用到过， 另一题是Merge Ksorted Lineked List
+Arrays/Collections.sort(list, new Comparator<Type>() {
+  public int compare(Type a, Type b) {
+    // return the compared result;
+  }
+});
+
+
 给个input list of floating points, 要求output list of integers, 满足以下两个constraint， 
 就是和跟Round(x1+x2+… +xn)的结果一样，但是minimize output 和input的绝对值差之和 
 #Input: A = # Sum T = Round(x1+x2+… +xn) ; 
